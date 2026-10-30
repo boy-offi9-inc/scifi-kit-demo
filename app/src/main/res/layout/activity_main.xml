@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <com.boyoffi9.scifikit.GlitchTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SCIFIKIT // VIEWS"
+            android:textColor="@color/sf_text"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Tap any glitch text to glitch it."
+            android:textColor="@color/sf_dim"
+            android:textSize="13sp" />
+
+        <com.boyoffi9.scifikit.HudFrameView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:padding="20dp"
+            app:sfAccentColor="#00E5FF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.boyoffi9.scifikit.GlitchTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SYSTEM ONLINE"
+                    android:textColor="@color/sf_text"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All subsystems nominal."
+                    android:textColor="@color/sf_dim"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </com.boyoffi9.scifikit.HudFrameView>
+
+        <com.boyoffi9.scifikit.HudFrameView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:padding="20dp"
+            app:sfAccentColor="#FF2D6F"
+            app:sfChamfer="22dp">
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INTRUSION DETECTED"
+                android:textColor="@color/sf_text"
+                android:textSize="22sp"
+                app:sfDecodeDurationMs="1400"
+                app:sfGlitchIntervalMs="1800"
+                app:sfIntensity="1.6"
+                app:sfSplitColorA="#00E5FF"
+                app:sfSplitColorB="#FFC400" />
+        </com.boyoffi9.scifikit.HudFrameView>
+
+        <com.boyoffi9.scifikit.HudFrameView
+            android:id="@+id/openCompose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="20dp"
+            app:sfAccentColor="#FFC400"
+            app:sfSweep="false">
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OPEN COMPOSE DEMO >"
+                android:textColor="@color/sf_text"
+                android:textSize="18sp" />
+        </com.boyoffi9.scifikit.HudFrameView>
+
+    </LinearLayout>
+</ScrollView>
