@@ -32,11 +32,11 @@ android {
 }
 
 dependencies {
-    implementation("com.github.boy-offi9-inc:scifi-ui-kit:0.1")
+    implementation("com.github.Boy-Offi9.scifi-ui-kit:0.2")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.activity:activity-compose:1.9.0")
 
-    // The library keeps Compose compileOnly, so the demo brings its own.
+
     implementation(platform("androidx.compose:compose-bom:2024.06.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.foundation:foundation")
