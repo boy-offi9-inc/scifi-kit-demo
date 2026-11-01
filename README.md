@@ -28,7 +28,7 @@ Requires JDK 17.
 The app depends on SciFiKit through JitPack, the same way any other app would. See `app/build.gradle.kts`:
 
 ```kotlin
-implementation("com.github.boy-offi9-inc.scifi-ui-kit:scifikit:v0.2.1")
+implementation("com.github.boy-offi9-inc:scifi-ui-kit:v0.2.1")
 ```
 
 The version is pinned to the `v0.2.1` release. To try unreleased changes, use `main-SNAPSHOT` instead, which builds the latest commit on `main`.
