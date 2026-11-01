@@ -76,6 +76,22 @@
         </com.boyoffi9.scifikit.HudFrameView>
 
         <com.boyoffi9.scifikit.HudFrameView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:padding="20dp"
+            app:sfAccentColor="#7CFFB2"
+            app:sfSweep="false">
+
+            <com.boyoffi9.scifikit.HoloRadarView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:sfAccentColor="#7CFFB2"
+                app:sfBlipCount="8" />
+        </com.boyoffi9.scifikit.HudFrameView>
+
+        <com.boyoffi9.scifikit.HudFrameView
             android:id="@+id/openCompose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
