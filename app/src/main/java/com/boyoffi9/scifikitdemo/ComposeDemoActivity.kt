@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,12 +19,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.boyoffi9.scifikit.compose.GlitchText
+import com.boyoffi9.scifikit.compose.HoloRadar
 import com.boyoffi9.scifikit.compose.HudFrame
 
 /** Jetpack Compose demo. Same look as the Views demo, same painters underneath. */
@@ -72,6 +75,16 @@ private fun Demo(onBack: () -> Unit) {
                 decodeDurationMs = 1400L,
                 replayKey = replay,
             )
+        }
+
+        HudFrame(
+            modifier = Modifier.fillMaxWidth(),
+            accentColor = Color(0xFF7CFFB2),
+            sweep = false,
+        ) {
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                HoloRadar(accentColor = Color(0xFF7CFFB2))
+            }
         }
 
         HudFrame(
