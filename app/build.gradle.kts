@@ -12,7 +12,7 @@ android {
         minSdk = 21
         targetSdk = 34
         versionCode = 1
-        versionName = "0.2.1"
+        versionName = "0.3.0"
     }
 
     buildFeatures {
@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation("com.github.boy-offi9-inc:scifi-ui-kit:v0.2.1")
+    implementation("com.github.boy-offi9-inc:scifi-ui-kit:main-SNAPSHOT")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.activity:activity-compose:1.9.0")
 

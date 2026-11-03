@@ -28,9 +28,9 @@ Requires JDK 17.
 The app depends on SciFiKit through JitPack, the same way any other app would. See `app/build.gradle.kts`:
 
 ```kotlin
-implementation("com.github.boy-offi9-inc:scifi-ui-kit:v0.2.1")
+implementation("com.github.boy-offi9-inc:scifi-ui-kit:main-SNAPSHOT")
 ```
 
-The version is pinned to the `v0.2.1` release. To try unreleased changes, use `main-SNAPSHOT` instead, which builds the latest commit on `main`.
+It tracks `main-SNAPSHOT`, the latest library commit, so changes show up here before a release. For a reproducible build, pin a release tag such as `v0.2.1`.
 
 The library keeps Jetpack Compose as `compileOnly`, so this app declares its own Compose dependencies.
