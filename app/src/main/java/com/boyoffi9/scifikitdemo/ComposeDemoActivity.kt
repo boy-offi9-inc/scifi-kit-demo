@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -46,6 +47,10 @@ class ComposeDemoActivity : ComponentActivity() {
 @Composable
 private fun Demo(onBack: () -> Unit) {
     var replay by remember { mutableIntStateOf(0) }
+    var decode by remember { mutableStateOf(DecodeMode.Classic) }
+    var glitch by remember { mutableStateOf(GlitchMode.Standard) }
+    var touch by remember { mutableStateOf(TouchMode.Burst) }
+    var radar by remember { mutableStateOf(RadarMode.Classic) }
 
     Column(
         modifier = Modifier
@@ -89,20 +94,14 @@ private fun Demo(onBack: () -> Unit) {
             accentColor = Color(0xFFB388FF),
             sweep = false,
         ) {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                DecodeModes.forEach { (label, mode) ->
-                    GlitchText(text = label, fontSize = 16.sp, decode = mode.config, replayKey = replay)
-                }
-            }
-        }
-
-        HudFrame(
-            modifier = Modifier.fillMaxWidth(),
-            accentColor = Color(0xFF7CFFB2),
-            sweep = false,
-        ) {
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                HoloRadar(accentColor = Color(0xFF7CFFB2))
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                ModePicker(DecodeMode.entries, decode) { decode = it }
+                GlitchText(
+                    text = "ACCESS GRANTED // NODE 7F",
+                    fontSize = 20.sp,
+                    decode = decode.config,
+                    replayKey = replay,
+                )
             }
         }
 
@@ -111,10 +110,9 @@ private fun Demo(onBack: () -> Unit) {
             accentColor = Color(0xFFFF2D6F),
             sweep = false,
         ) {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                GlitchModes.forEach { (label, mode) ->
-                    GlitchText(text = label, fontSize = 16.sp, glitch = mode.config)
-                }
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                ModePicker(GlitchMode.entries, glitch) { glitch = it }
+                GlitchText(text = "INTRUSION DETECTED", fontSize = 22.sp, glitch = glitch.config)
             }
         }
 
@@ -123,10 +121,9 @@ private fun Demo(onBack: () -> Unit) {
             accentColor = Color(0xFF7CFFB2),
             sweep = false,
         ) {
-            Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-                TouchModes.forEach { (label, mode) ->
-                    GlitchText(text = label, fontSize = 22.sp, touch = mode.config)
-                }
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                ModePicker(TouchMode.entries, touch) { touch = it }
+                GlitchText(text = "PRESS AND DRAG HERE", fontSize = 26.sp, touch = touch.config)
             }
         }
 
@@ -135,15 +132,9 @@ private fun Demo(onBack: () -> Unit) {
             sweep = false,
         ) {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                RadarModes.chunked(2).forEach { row ->
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                        row.forEach { (label, mode, color) ->
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                HoloRadar(size = 140.dp, accentColor = color, radar = mode.config)
-                                Dim(label)
-                            }
-                        }
-                    }
+                ModePicker(RadarMode.entries, radar) { radar = it }
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    HoloRadar(size = 180.dp, radar = radar.config)
                 }
             }
         }
@@ -216,35 +207,49 @@ private fun LiveConfig() {
     }
 }
 
-private val GlitchModes = listOf(
-    "SUBTLE // BARELY THERE" to GlitchMode.Subtle,
-    "STANDARD // THE ORIGINAL" to GlitchMode.Standard,
-    "VIOLENT // FULL TEAR" to GlitchMode.Violent,
-    "SIGNAL LOSS // DROPS OUT" to GlitchMode.SignalLoss,
-)
+@Composable
+private fun <T : Enum<T>> ModePicker(entries: List<T>, selected: T, onSelect: (T) -> Unit) {
+    var open by remember { mutableStateOf(false) }
 
-private val TouchModes = listOf(
-    "BURST // TAP" to TouchMode.Burst,
-    "FOLLOW // DRAG ON ME" to TouchMode.Follow,
-    "CHARGE // HOLD ME" to TouchMode.Charge,
-    "FOLLOW + CHARGE // BOTH" to TouchMode.FollowCharge,
-)
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { open = !open }
+                .padding(vertical = 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            PickerText(selected.label())
+            PickerText(if (open) "^" else "v")
+        }
+        if (open) {
+            entries.forEach { entry ->
+                PickerText(
+                    text = entry.label(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color(0xFF0B1218))
+                        .clickable {
+                            onSelect(entry)
+                            open = false
+                        }
+                        .padding(14.dp),
+                )
+            }
+        }
+    }
+}
 
-private val RadarModes = listOf(
-    Triple("TACTICAL", RadarMode.Tactical, Color(0xFF7CFFB2)),
-    Triple("CYBERPUNK", RadarMode.Cyberpunk, Color(0xFF00E5FF)),
-    Triple("PHOSPHOR", RadarMode.Phosphor, Color(0xFF7CFFB2)),
-    Triple("HOLOGRAM", RadarMode.Hologram, Color(0xFF00E5FF)),
-)
+private fun Enum<*>.label() = name.replace(Regex("(?<=[a-z])(?=[A-Z])"), " ").uppercase()
 
-private val DecodeModes = listOf(
-    "CLASSIC // THE ORIGINAL" to DecodeMode.Classic,
-    "RELAXED // SLOW AND CALM" to DecodeMode.Relaxed,
-    "ACTIVE // NEVER SETTLES" to DecodeMode.Active,
-    "RANDOM // ANY ORDER" to DecodeMode.Random,
-    "CENTER OUT // FROM MIDDLE" to DecodeMode.CenterOut,
-    "TYPEWRITER // CURSOR" to DecodeMode.Typewriter,
-)
+@Composable
+private fun PickerText(text: String, modifier: Modifier = Modifier) {
+    BasicText(
+        text = text,
+        modifier = modifier,
+        style = TextStyle(color = Color(0xFFE8FDFF), fontSize = 15.sp),
+    )
+}
 
 @Composable
 private fun Dim(text: String) {

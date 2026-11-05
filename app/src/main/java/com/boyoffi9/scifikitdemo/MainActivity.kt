@@ -3,7 +3,9 @@ package com.boyoffi9.scifikitdemo
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.activity.ComponentActivity
 import com.boyoffi9.scifikit.GlitchTextView
 import com.boyoffi9.scifikit.HoloRadarView
@@ -11,6 +13,7 @@ import com.boyoffi9.scifikit.HudFrameView
 import com.boyoffi9.scifikit.core.DecodeMode
 import com.boyoffi9.scifikit.core.GlitchMode
 import com.boyoffi9.scifikit.core.RadarMode
+import com.boyoffi9.scifikit.core.TouchMode
 
 class MainActivity : ComponentActivity() {
 
@@ -26,15 +29,38 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpLiveConfig()
+        setUpPickers()
 
-        val modes = findViewById<ViewGroup>(R.id.decodeModes)
-        findViewById<View>(R.id.replayDecode).setOnClickListener {
-            for (i in 0 until modes.childCount) {
-                (modes.getChildAt(i) as? GlitchTextView)?.replay()
-            }
-        }
+        val decodeSample = findViewById<GlitchTextView>(R.id.decodeSample)
+        findViewById<View>(R.id.replayDecode).setOnClickListener { decodeSample.replay() }
         findViewById<View>(R.id.openCompose).setOnClickListener {
             startActivity(Intent(this, ComposeDemoActivity::class.java))
+        }
+    }
+
+    private fun setUpPickers() {
+        val decodeSample = findViewById<GlitchTextView>(R.id.decodeSample)
+        val glitchSample = findViewById<GlitchTextView>(R.id.glitchSample)
+        val touchSample = findViewById<GlitchTextView>(R.id.touchSample)
+        val radarSample = findViewById<HoloRadarView>(R.id.radarSample)
+
+        bindPicker(R.id.decodePicker, DecodeMode.entries) { decodeSample.decode = it.config }
+        bindPicker(R.id.glitchPicker, GlitchMode.entries) { glitchSample.glitch = it.config }
+        bindPicker(R.id.touchPicker, TouchMode.entries) { touchSample.touch = it.config }
+        bindPicker(R.id.radarPicker, RadarMode.entries) { radarSample.radar = it.config }
+    }
+
+    private fun <T : Enum<T>> bindPicker(id: Int, modes: List<T>, onPick: (T) -> Unit) {
+        val spinner = findViewById<Spinner>(id)
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, modes.map { it.name.replace(Regex("(?<=[a-z])(?=[A-Z])"), " ").uppercase() })
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, itemId: Long) {
+                onPick(modes[position])
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) = Unit
         }
     }
 
