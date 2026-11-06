@@ -60,14 +60,14 @@ private fun Demo(onBack: () -> Unit) {
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        GlitchText(text = "SCIFIKIT // COMPOSE", fontSize = 30.sp, replayKey = replay)
+        GlitchText(text = "SCIFIKIT // COMPOSE", fontSize = 30.sp, glitch = Calm, replayKey = replay)
         Dim("Tap any glitch text to glitch it.")
 
         LiveConfig()
 
         HudFrame(modifier = Modifier.fillMaxWidth()) {
             Column {
-                GlitchText(text = "SYSTEM ONLINE", fontSize = 22.sp, replayKey = replay)
+                GlitchText(text = "SYSTEM ONLINE", fontSize = 22.sp, glitch = Calm, replayKey = replay)
                 Dim("All subsystems nominal.")
             }
         }
@@ -82,8 +82,8 @@ private fun Demo(onBack: () -> Unit) {
                 fontSize = 22.sp,
                 splitColorA = Color(0xFF00E5FF),
                 splitColorB = Color(0xFFFFC400),
+                glitch = Calm,
                 intensity = 1.6f,
-                glitchIntervalMs = 1800L,
                 decodeDurationMs = 1400L,
                 replayKey = replay,
             )
@@ -99,6 +99,7 @@ private fun Demo(onBack: () -> Unit) {
                 GlitchText(
                     text = "ACCESS GRANTED // NODE 7F",
                     fontSize = 20.sp,
+                    glitch = Calm,
                     decode = decode.config,
                     replayKey = replay,
                 )
@@ -123,7 +124,7 @@ private fun Demo(onBack: () -> Unit) {
         ) {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 ModePicker(TouchMode.entries, touch) { touch = it }
-                GlitchText(text = "PRESS AND DRAG HERE", fontSize = 26.sp, touch = touch.config)
+                GlitchText(text = "PRESS AND DRAG HERE", fontSize = 26.sp, glitch = Calm, touch = touch.config)
             }
         }
 
@@ -146,7 +147,7 @@ private fun Demo(onBack: () -> Unit) {
             accentColor = Color(0xFFFFC400),
             sweep = false,
         ) {
-            GlitchText(text = "REPLAY DECODE >", fontSize = 18.sp)
+            GlitchText(text = "REPLAY DECODE >", fontSize = 18.sp, glitch = Calm)
         }
 
         HudFrame(
@@ -156,10 +157,12 @@ private fun Demo(onBack: () -> Unit) {
             accentColor = Color(0xFF7CFFB2),
             sweep = false,
         ) {
-            GlitchText(text = "< BACK TO VIEWS DEMO", fontSize = 18.sp)
+            GlitchText(text = "< BACK TO VIEWS DEMO", fontSize = 18.sp, glitch = Calm)
         }
     }
 }
+
+private val Calm = GlitchMode.OnTouch.config
 
 private val LiveColors = listOf(
     Color(0xFF00E5FF),
