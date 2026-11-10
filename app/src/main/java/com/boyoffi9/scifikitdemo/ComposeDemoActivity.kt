@@ -30,9 +30,11 @@ import androidx.compose.ui.unit.sp
 import com.boyoffi9.scifikit.compose.GlitchText
 import com.boyoffi9.scifikit.compose.HoloRadar
 import com.boyoffi9.scifikit.compose.HudFrame
+import com.boyoffi9.scifikit.compose.SciFiTheme
 import com.boyoffi9.scifikit.core.DecodeMode
 import com.boyoffi9.scifikit.core.GlitchMode
 import com.boyoffi9.scifikit.core.RadarMode
+import com.boyoffi9.scifikit.core.SciFiPalette
 import com.boyoffi9.scifikit.core.TouchMode
 
 /** Jetpack Compose demo. Same look as the Views demo, same painters underneath. */
@@ -40,12 +42,65 @@ class ComposeDemoActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { Demo(onBack = { finish() }) }
+        setContent { DemoRoot(onBack = { finish() }) }
+    }
+}
+
+private enum class DemoPalette(val palette: SciFiPalette) {
+    Cyan(SciFiPalette()),
+    Amber(
+        SciFiPalette(
+            accent = 0xFFFFC400.toInt(),
+            secondary = 0xFFFF5A1F.toInt(),
+            text = 0xFFFFF1CC.toInt(),
+            dim = 0xFFC9A24A.toInt(),
+            background = 0xFF0A0700.toInt(),
+            glow = 1.3f,
+        ),
+    ),
+    Phosphor(
+        SciFiPalette(
+            accent = 0xFF7CFFB2.toInt(),
+            secondary = 0xFFC8FF4D.toInt(),
+            text = 0xFFD9FFE8.toInt(),
+            dim = 0xFF5FA37A.toInt(),
+            background = 0xFF03100A.toInt(),
+            glow = 1.1f,
+        ),
+    ),
+    Magenta(
+        SciFiPalette(
+            accent = 0xFFFF2D6F.toInt(),
+            secondary = 0xFF00E5FF.toInt(),
+            text = 0xFFFFE3EE.toInt(),
+            dim = 0xFFC27A94.toInt(),
+            background = 0xFF0E0510.toInt(),
+            glow = 1.2f,
+        ),
+    ),
+    Mono(
+        SciFiPalette(
+            accent = 0xFFE0E0E0.toInt(),
+            secondary = 0xFF8A8A8A.toInt(),
+            text = 0xFFFFFFFF.toInt(),
+            dim = 0xFF888888.toInt(),
+            background = 0xFF000000.toInt(),
+            glow = 0f,
+        ),
+    ),
+}
+
+@Composable
+private fun DemoRoot(onBack: () -> Unit) {
+    var selected by remember { mutableStateOf(DemoPalette.Cyan) }
+
+    SciFiTheme(palette = selected.palette) {
+        Demo(selected = selected, onSelect = { selected = it }, onBack = onBack)
     }
 }
 
 @Composable
-private fun Demo(onBack: () -> Unit) {
+private fun Demo(selected: DemoPalette, onSelect: (DemoPalette) -> Unit, onBack: () -> Unit) {
     var replay by remember { mutableIntStateOf(0) }
     var decode by remember { mutableStateOf(DecodeMode.Classic) }
     var glitch by remember { mutableStateOf(GlitchMode.Standard) }
@@ -55,13 +110,25 @@ private fun Demo(onBack: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF05080C))
+            .background(Color(SciFiTheme.palette.background))
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         GlitchText(text = "SCIFIKIT // COMPOSE", fontSize = 30.sp, glitch = Calm, replayKey = replay)
         Dim("Tap any glitch text to glitch it.")
+
+        HudFrame(modifier = Modifier.fillMaxWidth(), sweep = false) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                ModePicker(DemoPalette.entries, selected, onSelect)
+                GlitchText(text = "THEMED // FOLLOWS THE PALETTE", fontSize = 18.sp, glitch = Calm)
+                HoloRadar(size = 140.dp)
+            }
+        }
 
         LiveConfig()
 
@@ -250,7 +317,7 @@ private fun PickerText(text: String, modifier: Modifier = Modifier) {
     BasicText(
         text = text,
         modifier = modifier,
-        style = TextStyle(color = Color(0xFFE8FDFF), fontSize = 15.sp),
+        style = TextStyle(color = Color(SciFiTheme.palette.text), fontSize = 15.sp),
     )
 }
 
@@ -258,6 +325,6 @@ private fun PickerText(text: String, modifier: Modifier = Modifier) {
 private fun Dim(text: String) {
     BasicText(
         text = text,
-        style = TextStyle(color = Color(0xFF7FB8C4), fontSize = 13.sp),
+        style = TextStyle(color = Color(SciFiTheme.palette.dim), fontSize = 13.sp),
     )
 }
