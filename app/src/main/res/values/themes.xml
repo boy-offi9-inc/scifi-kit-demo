@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.SciFiSample" parent="android:Theme.Material.NoActionBar">
-        <item name="android:windowBackground">@color/sf_bg</item>
-        <item name="android:statusBarColor">@color/sf_bg</item>
-        <item name="android:navigationBarColor">@color/sf_bg</item>
+        <item name="android:windowBackground">?attr/sfThemeBackground</item>
+        <item name="android:statusBarColor">?attr/sfThemeBackground</item>
+        <item name="android:navigationBarColor">?attr/sfThemeBackground</item>
+        <item name="sfThemeBackground">@color/sf_bg</item>
+    </style>
+
+    <style name="ThemeOverlay.SciFi.Amber" parent="">
+        <item name="sfThemeAccent">#FFC400</item>
+        <item name="sfThemeSecondary">#FF5A1F</item>
+        <item name="sfThemeText">#FFF1CC</item>
+        <item name="sfThemeDim">#C9A24A</item>
+        <item name="sfThemeBackground">#0A0700</item>
+        <item name="sfThemeGlow">1.3</item>
+    </style>
+
+    <style name="ThemeOverlay.SciFi.Phosphor" parent="">
+        <item name="sfThemeAccent">#7CFFB2</item>
+        <item name="sfThemeSecondary">#C8FF4D</item>
+        <item name="sfThemeText">#D9FFE8</item>
+        <item name="sfThemeDim">#5FA37A</item>
+        <item name="sfThemeBackground">#03100A</item>
+        <item name="sfThemeGlow">1.1</item>
+    </style>
+
+    <style name="ThemeOverlay.SciFi.Magenta" parent="">
+        <item name="sfThemeAccent">#FF2D6F</item>
+        <item name="sfThemeSecondary">#00E5FF</item>
+        <item name="sfThemeText">#FFE3EE</item>
+        <item name="sfThemeDim">#C27A94</item>
+        <item name="sfThemeBackground">#0E0510</item>
+        <item name="sfThemeGlow">1.2</item>
+    </style>
+
+    <style name="ThemeOverlay.SciFi.Mono" parent="">
+        <item name="sfThemeAccent">#E0E0E0</item>
+        <item name="sfThemeSecondary">#8A8A8A</item>
+        <item name="sfThemeText">#FFFFFF</item>
+        <item name="sfThemeDim">#888888</item>
+        <item name="sfThemeBackground">#000000</item>
+        <item name="sfThemeGlow">0</item>
     </style>
 </resources>

@@ -17,6 +17,16 @@ import com.boyoffi9.scifikit.core.TouchMode
 
 class MainActivity : ComponentActivity() {
 
+    private val overlays = intArrayOf(
+        0,
+        R.style.ThemeOverlay_SciFi_Amber,
+        R.style.ThemeOverlay_SciFi_Phosphor,
+        R.style.ThemeOverlay_SciFi_Magenta,
+        R.style.ThemeOverlay_SciFi_Mono,
+    )
+
+    private val themeNames = listOf("THEME: CYAN", "THEME: AMBER", "THEME: PHOSPHOR", "THEME: MAGENTA", "THEME: MONO")
+
     private val liveColors = intArrayOf(
         0xFF00E5FF.toInt(),
         0xFFFF2D6F.toInt(),
@@ -27,7 +37,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (overlays[overlayIndex] != 0) theme.applyStyle(overlays[overlayIndex], true)
         setContentView(R.layout.activity_main)
+        setUpThemePicker()
         setUpLiveConfig()
         setUpPickers()
 
@@ -35,6 +47,23 @@ class MainActivity : ComponentActivity() {
         findViewById<View>(R.id.replayDecode).setOnClickListener { decodeSample.replay() }
         findViewById<View>(R.id.openCompose).setOnClickListener {
             startActivity(Intent(this, ComposeDemoActivity::class.java))
+        }
+    }
+
+    private fun setUpThemePicker() {
+        val spinner = findViewById<Spinner>(R.id.themePicker)
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, themeNames)
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        spinner.adapter = adapter
+        spinner.setSelection(overlayIndex, false)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, itemId: Long) {
+                if (position == overlayIndex) return
+                overlayIndex = position
+                recreate()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) = Unit
         }
     }
 
@@ -91,5 +120,9 @@ class MainActivity : ComponentActivity() {
             radar.rings = 2 + step % 5
             radar.rotationPeriodMs = if (step % 2 == 0) 4000L else 1800L
         }
+    }
+
+    private companion object {
+        var overlayIndex = 0
     }
 }
