@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation("com.github.boy-offi9-inc:scifi-ui-kit:main-SNAPSHOT")
+    implementation("com.github.boy-offi9-inc:scifi-ui-kit:v0.4.1")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.activity:activity-compose:1.9.0")
 
