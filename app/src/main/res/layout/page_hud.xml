@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="20dp"
+        app:sfAccentColor="#00E5FF"
+        app:sfSweep="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SYSTEM ONLINE"
+                android:textSize="22sp"
+                app:sfGlitchMode="onTouch" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Default frame. Takes its colour from the theme."
+                android:textColor="?attr/sfThemeDim"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.HudFrameView>
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="20dp"
+        app:sfAccentColor="#FF2D6F"
+        app:sfChamfer="22dp"
+        app:sfSweep="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INTRUSION DETECTED"
+                android:textSize="22sp"
+                app:sfSplitColorA="#00E5FF"
+                app:sfSplitColorB="#FFC400"
+                app:sfGlitchMode="onTouch"
+                app:sfIntensity="1.6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="chamfer = 22dp, accent #FF2D6F"
+                android:textColor="?attr/sfThemeDim"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.HudFrameView>
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="20dp"
+        app:sfAccentColor="#B388FF"
+        app:sfSweep="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STATIC FRAME"
+                android:textSize="22sp"
+                app:sfGlitchMode="onTouch" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="sweep = false"
+                android:textColor="?attr/sfThemeDim"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.HudFrameView>
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:sfAccentColor="#7CFFB2"
+        app:sfScanlines="false"
+        app:sfSweep="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLEAN FRAME"
+                android:textSize="22sp"
+                app:sfGlitchMode="onTouch" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="scanlines = false"
+                android:textColor="?attr/sfThemeDim"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.HudFrameView>
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:sfSweep="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="THEME OVERLAY"
+                android:textColor="?attr/sfThemeDim"
+                android:textSize="13sp" />
+
+            <Spinner
+                android:id="@+id/themePicker"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:popupBackground="#0B1218" />
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="THEMED // FOLLOWS THE PALETTE"
+                android:textSize="18sp"
+                app:sfGlitchMode="onTouch" />
+
+            <com.boyoffi9.scifikit.HoloRadarView
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal"
+                app:sfAccentColor="#7CFFB2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Every colour here comes from the theme."
+                android:textColor="?attr/sfThemeDim"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.HudFrameView>
+
+</LinearLayout>
