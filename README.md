@@ -4,10 +4,22 @@ Demo app for [SciFiKit](https://github.com/boy-offi9-inc/scifi-ui-kit), a librar
 
 The app has two screens that show the same components built two ways:
 
-- **Views demo:** XML layouts with `HudFrameView`, `GlitchTextView` and `HoloRadarView`
-- **Compose demo:** the same screen with `HudFrame`, `GlitchText` and `HoloRadar`
+- **Views demo:** XML layouts with `HudFrameView`, `GlitchTextView`, `HoloRadarView` and `NeonButtonView`
+- **Compose demo:** the same screen with `HudFrame`, `GlitchText`, `HoloRadar` and `NeonButton`
 
-Tap any glitch text to trigger a glitch. On the Views screen, the amber button opens the Compose demo. On the Compose screen, amber replays the decode and green goes back.
+Each screen is split into pages, chosen from the tab strip under the title:
+
+| Page | Shows |
+|---|---|
+| HUD | Frame variants: default, chamfered, no sweep, no scanlines |
+| TEXT | Decode, glitch and touch modes, each with a dropdown |
+| RADAR | Radar modes with a dropdown |
+| BUTTON | Neon button styles with a dropdown, plus a disabled button |
+| THEME | Palettes, applied through the theme |
+| LIVE | A panel you tap to change every setting at runtime |
+| ALL | Every page above on one screen |
+
+Glitch text stays still until you touch it, apart from the glitch sample on the TEXT page, so each feature can be seen on its own. Tap any glitch text to trigger a glitch. `COMPOSE >` on the Views screen opens the Compose demo, and `< VIEWS` on the Compose screen goes back.
 
 ## Get the app
 
