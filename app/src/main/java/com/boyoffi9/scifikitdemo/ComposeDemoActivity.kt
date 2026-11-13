@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
@@ -30,9 +31,11 @@ import androidx.compose.ui.unit.sp
 import com.boyoffi9.scifikit.compose.GlitchText
 import com.boyoffi9.scifikit.compose.HoloRadar
 import com.boyoffi9.scifikit.compose.HudFrame
+import com.boyoffi9.scifikit.compose.NeonButton
 import com.boyoffi9.scifikit.compose.SciFiTheme
 import com.boyoffi9.scifikit.core.DecodeMode
 import com.boyoffi9.scifikit.core.GlitchMode
+import com.boyoffi9.scifikit.core.NeonStyle
 import com.boyoffi9.scifikit.core.RadarMode
 import com.boyoffi9.scifikit.core.SciFiPalette
 import com.boyoffi9.scifikit.core.TouchMode
@@ -90,72 +93,148 @@ private enum class DemoPalette(val palette: SciFiPalette) {
     ),
 }
 
+private enum class DemoPage(val title: String) {
+    Hud("HUD"),
+    Text("TEXT"),
+    Radar("RADAR"),
+    Button("BUTTON"),
+    Theme("THEME"),
+    Live("LIVE"),
+    All("ALL"),
+}
+
 @Composable
 private fun DemoRoot(onBack: () -> Unit) {
     var selected by remember { mutableStateOf(DemoPalette.Cyan) }
+    var page by remember { mutableStateOf(DemoPage.Hud) }
 
     SciFiTheme(palette = selected.palette) {
-        Demo(selected = selected, onSelect = { selected = it }, onBack = onBack)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(SciFiTheme.palette.background)),
+        ) {
+            GlitchText(
+                text = "SCIFIKIT // COMPOSE",
+                modifier = Modifier.padding(start = 20.dp, top = 20.dp),
+                fontSize = 30.sp,
+                glitch = Calm,
+            )
+            Dim("Pick a page. Tap any glitch text to glitch it.", Modifier.padding(start = 20.dp, bottom = 12.dp))
+            Tabs(page, onSelect = { page = it }, onBack = onBack)
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                when (page) {
+                    DemoPage.Hud -> HudSection()
+                    DemoPage.Text -> TextSection()
+                    DemoPage.Radar -> RadarSection()
+                    DemoPage.Button -> ButtonSection()
+                    DemoPage.Theme -> ThemeSection(selected) { selected = it }
+                    DemoPage.Live -> LiveConfig()
+                    DemoPage.All -> {
+                        HudSection()
+                        TextSection()
+                        RadarSection()
+                        ButtonSection()
+                        ThemeSection(selected) { selected = it }
+                        LiveConfig()
+                    }
+                }
+            }
+        }
     }
 }
 
 @Composable
-private fun Demo(selected: DemoPalette, onSelect: (DemoPalette) -> Unit, onBack: () -> Unit) {
-    var replay by remember { mutableIntStateOf(0) }
-    var decode by remember { mutableStateOf(DecodeMode.Classic) }
-    var glitch by remember { mutableStateOf(GlitchMode.Standard) }
-    var touch by remember { mutableStateOf(TouchMode.Burst) }
-    var radar by remember { mutableStateOf(RadarMode.Classic) }
-
-    Column(
+private fun Tabs(selected: DemoPage, onSelect: (DemoPage) -> Unit, onBack: () -> Unit) {
+    val palette = SciFiTheme.palette
+    Row(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color(SciFiTheme.palette.background))
-            .verticalScroll(rememberScrollState())
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = 12.dp),
     ) {
-        GlitchText(text = "SCIFIKIT // COMPOSE", fontSize = 30.sp, glitch = Calm, replayKey = replay)
-        Dim("Tap any glitch text to glitch it.")
-
-        HudFrame(modifier = Modifier.fillMaxWidth(), sweep = false) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                ModePicker(DemoPalette.entries, selected, onSelect)
-                GlitchText(text = "THEMED // FOLLOWS THE PALETTE", fontSize = 18.sp, glitch = Calm)
-                HoloRadar(size = 140.dp)
-            }
+        TabText("< VIEWS", Color(palette.dim), onBack)
+        DemoPage.entries.forEach { entry ->
+            TabText(entry.title, Color(if (entry == selected) palette.accent else palette.dim)) { onSelect(entry) }
         }
+    }
+}
 
-        LiveConfig()
+@Composable
+private fun TabText(text: String, color: Color, onClick: () -> Unit) {
+    BasicText(
+        text = text,
+        modifier = Modifier
+            .clickable(onClick = onClick)
+            .padding(16.dp),
+        style = TextStyle(color = color, fontSize = 14.sp, letterSpacing = 1.4.sp),
+    )
+}
 
+@Composable
+private fun HudSection() {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         HudFrame(modifier = Modifier.fillMaxWidth()) {
             Column {
-                GlitchText(text = "SYSTEM ONLINE", fontSize = 22.sp, glitch = Calm, replayKey = replay)
-                Dim("All subsystems nominal.")
+                GlitchText(text = "SYSTEM ONLINE", fontSize = 22.sp, glitch = Calm)
+                Dim("Default frame. Takes its colour from the theme.")
             }
         }
-
         HudFrame(
             modifier = Modifier.fillMaxWidth(),
             accentColor = Color(0xFFFF2D6F),
             chamfer = 22.dp,
         ) {
-            GlitchText(
-                text = "INTRUSION DETECTED",
-                fontSize = 22.sp,
-                splitColorA = Color(0xFF00E5FF),
-                splitColorB = Color(0xFFFFC400),
-                glitch = Calm,
-                intensity = 1.6f,
-                decodeDurationMs = 1400L,
-                replayKey = replay,
-            )
+            Column {
+                GlitchText(
+                    text = "INTRUSION DETECTED",
+                    fontSize = 22.sp,
+                    splitColorA = Color(0xFF00E5FF),
+                    splitColorB = Color(0xFFFFC400),
+                    glitch = Calm,
+                    intensity = 1.6f,
+                )
+                Dim("chamfer = 22.dp, accent #FF2D6F")
+            }
         }
+        HudFrame(
+            modifier = Modifier.fillMaxWidth(),
+            accentColor = Color(0xFFB388FF),
+            sweep = false,
+        ) {
+            Column {
+                GlitchText(text = "STATIC FRAME", fontSize = 22.sp, glitch = Calm)
+                Dim("sweep = false")
+            }
+        }
+        HudFrame(
+            modifier = Modifier.fillMaxWidth(),
+            accentColor = Color(0xFF7CFFB2),
+            scanlines = false,
+            sweep = false,
+        ) {
+            Column {
+                GlitchText(text = "CLEAN FRAME", fontSize = 22.sp, glitch = Calm)
+                Dim("scanlines = false")
+            }
+        }
+    }
+}
 
+@Composable
+private fun TextSection() {
+    var replay by remember { mutableIntStateOf(0) }
+    var decode by remember { mutableStateOf(DecodeMode.Classic) }
+    var glitch by remember { mutableStateOf(GlitchMode.Standard) }
+    var touch by remember { mutableStateOf(TouchMode.Burst) }
+
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         HudFrame(
             modifier = Modifier.fillMaxWidth(),
             accentColor = Color(0xFFB388FF),
@@ -172,7 +251,15 @@ private fun Demo(selected: DemoPalette, onSelect: (DemoPalette) -> Unit, onBack:
                 )
             }
         }
-
+        HudFrame(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { replay++ },
+            accentColor = Color(0xFFFFC400),
+            sweep = false,
+        ) {
+            GlitchText(text = "REPLAY DECODE >", fontSize = 18.sp, glitch = Calm)
+        }
         HudFrame(
             modifier = Modifier.fillMaxWidth(),
             accentColor = Color(0xFFFF2D6F),
@@ -183,7 +270,6 @@ private fun Demo(selected: DemoPalette, onSelect: (DemoPalette) -> Unit, onBack:
                 GlitchText(text = "INTRUSION DETECTED", fontSize = 22.sp, glitch = glitch.config)
             }
         }
-
         HudFrame(
             modifier = Modifier.fillMaxWidth(),
             accentColor = Color(0xFF7CFFB2),
@@ -194,37 +280,69 @@ private fun Demo(selected: DemoPalette, onSelect: (DemoPalette) -> Unit, onBack:
                 GlitchText(text = "PRESS AND DRAG HERE", fontSize = 26.sp, glitch = Calm, touch = touch.config)
             }
         }
+    }
+}
 
-        HudFrame(
-            modifier = Modifier.fillMaxWidth(),
-            sweep = false,
-        ) {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                ModePicker(RadarMode.entries, radar) { radar = it }
-                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    HoloRadar(size = 180.dp, radar = radar.config)
-                }
+@Composable
+private fun RadarSection() {
+    var radar by remember { mutableStateOf(RadarMode.Classic) }
+
+    HudFrame(
+        modifier = Modifier.fillMaxWidth(),
+        accentColor = Color(0xFF00E5FF),
+        sweep = false,
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            ModePicker(RadarMode.entries, radar) { radar = it }
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                HoloRadar(size = 180.dp, accentColor = Color(0xFF00E5FF), radar = radar.config)
             }
         }
+    }
+}
 
-        HudFrame(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { replay++ },
-            accentColor = Color(0xFFFFC400),
-            sweep = false,
-        ) {
-            GlitchText(text = "REPLAY DECODE >", fontSize = 18.sp, glitch = Calm)
+@Composable
+private fun ButtonSection() {
+    var style by remember { mutableStateOf(NeonStyle.Outline) }
+    var taps by remember { mutableIntStateOf(0) }
+
+    HudFrame(
+        modifier = Modifier.fillMaxWidth(),
+        accentColor = Color(0xFF00E5FF),
+        sweep = false,
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            ModePicker(NeonStyle.entries, style) { style = it }
+            NeonButton(
+                text = "ENGAGE",
+                onClick = { taps++ },
+                modifier = Modifier.fillMaxWidth(),
+                style = style.config,
+            )
+            NeonButton(
+                text = "LOCKED",
+                onClick = { },
+                modifier = Modifier.fillMaxWidth(),
+                enabled = false,
+                style = style.config,
+            )
+            Dim("TAPS: $taps")
         }
+    }
+}
 
-        HudFrame(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable(onClick = onBack),
-            accentColor = Color(0xFF7CFFB2),
-            sweep = false,
+@Composable
+private fun ThemeSection(selected: DemoPalette, onSelect: (DemoPalette) -> Unit) {
+    HudFrame(modifier = Modifier.fillMaxWidth(), sweep = false) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            GlitchText(text = "< BACK TO VIEWS DEMO", fontSize = 18.sp, glitch = Calm)
+            ModePicker(DemoPalette.entries, selected, onSelect)
+            GlitchText(text = "THEMED // FOLLOWS THE PALETTE", fontSize = 18.sp, glitch = Calm)
+            HoloRadar(size = 140.dp)
+            Dim("Every colour here comes from the theme.")
         }
     }
 }
@@ -322,9 +440,10 @@ private fun PickerText(text: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun Dim(text: String) {
+private fun Dim(text: String, modifier: Modifier = Modifier) {
     BasicText(
         text = text,
+        modifier = modifier,
         style = TextStyle(color = Color(SciFiTheme.palette.dim), fontSize = 13.sp),
     )
 }
