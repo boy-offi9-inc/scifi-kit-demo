@@ -1,6 +1,7 @@
 package com.boyoffi9.scifikitdemo
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -12,6 +13,10 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.boyoffi9.scifikit.GlitchTextView
 import com.boyoffi9.scifikit.HoloRadarView
 import com.boyoffi9.scifikit.HudFrameView
@@ -61,8 +66,15 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val bars = SystemBarStyle.dark(Color.TRANSPARENT)
+        enableEdgeToEdge(statusBarStyle = bars, navigationBarStyle = bars)
         if (overlays[overlayIndex] != 0) theme.applyStyle(overlays[overlayIndex], true)
         setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.root)) { view, insets ->
+            val safe = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            view.setPadding(safe.left, safe.top, safe.right, safe.bottom)
+            insets
+        }
         palette = sciFiPalette()
         buildTabs()
         show(currentPage)
