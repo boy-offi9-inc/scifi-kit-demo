@@ -5,10 +5,18 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="GLITCH TEXT"
+        android:textColor="?attr/sfThemeDim" />
+
     <com.boyoffi9.scifikit.HudFrameView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:padding="20dp"
         app:sfAccentColor="#B388FF"
         app:sfSweep="false">
@@ -39,7 +47,7 @@
         android:id="@+id/replayDecode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:clickable="true"
         android:focusable="true"
         android:padding="20dp"
@@ -57,7 +65,7 @@
     <com.boyoffi9.scifikit.HudFrameView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:padding="20dp"
         app:sfAccentColor="#FF2D6F"
         app:sfSweep="false">
@@ -86,7 +94,6 @@
     <com.boyoffi9.scifikit.HudFrameView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:padding="20dp"
         app:sfAccentColor="#7CFFB2"
         app:sfSweep="false">

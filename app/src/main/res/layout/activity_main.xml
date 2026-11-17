@@ -6,27 +6,58 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.boyoffi9.scifikit.GlitchTextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="SCIFIKIT // VIEWS"
-        android:textSize="30sp"
-        app:sfGlitchMode="onTouch" />
+        android:layout_marginEnd="20dp"
+        android:baselineAligned="false"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.boyoffi9.scifikit.GlitchTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SCIFIKIT // DEMO"
+            android:textSize="24sp"
+            app:sfGlitchMode="onTouch" />
+
+        <TextView
+            android:id="@+id/kitVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="v0.5"
+            android:textColor="?attr/sfThemeDim"
+            android:textSize="11sp" />
+    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="12dp"
-        android:text="Pick a page. Tap any glitch text to glitch it."
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        android:text="Neon HUD components for Views and Compose"
         android:textColor="?attr/sfThemeDim"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:background="?attr/sfThemeDim"
+        android:alpha="0.25" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipToPadding="false"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:scrollbars="none">
@@ -48,6 +79,9 @@
             android:id="@+id/pageContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp" />
+            android:paddingStart="20dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="28dp" />
     </ScrollView>
 </LinearLayout>

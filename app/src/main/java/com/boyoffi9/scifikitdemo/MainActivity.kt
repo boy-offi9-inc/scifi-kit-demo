@@ -2,6 +2,7 @@ package com.boyoffi9.scifikitdemo
 
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -34,14 +35,15 @@ class MainActivity : ComponentActivity() {
     private class Page(val title: String, val layout: Int)
 
     private val pages = listOf(
+        Page("ALL", R.layout.page_all),
         Page("HUD", R.layout.page_hud),
         Page("TEXT", R.layout.page_text),
         Page("RADAR", R.layout.page_radar),
         Page("BUTTON", R.layout.page_button),
         Page("THEME", R.layout.page_theme),
         Page("LIVE", R.layout.page_live),
-        Page("ALL", R.layout.page_all),
     )
+    private val livePageIndex = pages.indexOfFirst { it.layout == R.layout.page_live }
 
     private val overlays = intArrayOf(
         0,
@@ -61,7 +63,7 @@ class MainActivity : ComponentActivity() {
         0xFFB388FF.toInt(),
     )
 
-    private val tabViews = mutableListOf<TextView>()
+    private val tabViews = mutableListOf<LinearLayout>()
     private lateinit var palette: SciFiPalette
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +78,7 @@ class MainActivity : ComponentActivity() {
             insets
         }
         palette = sciFiPalette()
+        findViewById<TextView>(R.id.kitVersion)?.text = "v0.5 // VIEWS+COMPOSE"
         buildTabs()
         show(currentPage)
     }
@@ -90,19 +93,43 @@ class MainActivity : ComponentActivity() {
         tabs.addView(tab("COMPOSE >", pad) { startActivity(Intent(this, ComposeDemoActivity::class.java)) })
     }
 
-    private fun tab(title: String, pad: Int, onClick: () -> Unit): TextView = TextView(this).apply {
-        text = title
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
-        letterSpacing = 0.1f
-        gravity = Gravity.CENTER
-        setPadding(pad * 2, pad * 2, pad * 2, pad * 2)
-        setTextColor(palette.dim)
-        setOnClickListener { onClick() }
+    private fun tab(title: String, pad: Int, onClick: () -> Unit): LinearLayout {
+        val strip = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+        }
+        val label = TextView(this).apply {
+            text = title
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+            letterSpacing = 0.1f
+            gravity = Gravity.CENTER
+            setPadding(pad * 2, pad * 2, pad * 2, pad)
+            setTextColor(palette.dim)
+            tag = "label"
+        }
+        val underline = View(this).apply {
+            tag = "underline"
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (2 * pad / 8).coerceAtLeast(2))
+        }
+        strip.addView(label)
+        strip.addView(underline)
+        strip.setOnClickListener { onClick() }
+        return strip
     }
 
     private fun show(index: Int) {
         currentPage = index
-        tabViews.forEachIndexed { i, view -> view.setTextColor(if (i == index) palette.accent else palette.dim) }
+        tabViews.forEach { strip ->
+            val label = strip.findViewWithTag<TextView>("label")
+            val underline = strip.findViewWithTag<View>("underline")
+            val active = tabViews.indexOf(strip) == index
+            label.setTextColor(if (active) palette.accent else palette.dim)
+            underline.visibility = if (active) View.VISIBLE else View.INVISIBLE
+            underline.background = GradientDrawable().apply {
+                setColor(if (active) palette.accent else Color.TRANSPARENT)
+                cornerRadius = 2f * resources.displayMetrics.density
+            }
+        }
         val container = findViewById<FrameLayout>(R.id.pageContainer)
         container.removeAllViews()
         val root = layoutInflater.inflate(pages[index].layout, container, false)
@@ -112,6 +139,38 @@ class MainActivity : ComponentActivity() {
         bindButton(root)
         bindTheme(root)
         bindLive(root)
+        bindShowcase(root)
+        if (index == livePageIndex) startBootSequence(root)
+    }
+
+    private fun bindShowcase(root: View) {
+        val decode = root.findViewById<GlitchTextView>(R.id.showcaseDecode) ?: return
+        root.findViewById<View>(R.id.showcaseReplay)?.setOnClickListener { decode.replay() }
+    }
+
+    private fun startBootSequence(root: View) {
+        val boot = root.findViewById<TextView>(R.id.bootLog) ?: return
+        val lines = listOf(
+            "BOOT // SCI-FI CORE v0.5",
+            "LOADING PALETTE MODULES ........ OK",
+            "CALIBRATING RADAR ARRAY ........ OK",
+            "GLITCH ENGINES ................. ARMED",
+            "NEON DRIVE ..................... ONLINE",
+            "ALL SYSTEMS NOMINAL",
+        )
+        boot.handler.removeCallbacksAndMessages(null)
+        boot.text = ""
+        var i = 0
+        val ticker = object : Runnable {
+            override fun run() {
+                if (i < lines.size) {
+                    boot.text = boot.text.toString() + (if (i == 0) "" else "\n") + lines[i]
+                    i++
+                    boot.postDelayed(this, 220)
+                }
+            }
+        }
+        boot.post(ticker)
     }
 
     private fun bindText(root: View) {

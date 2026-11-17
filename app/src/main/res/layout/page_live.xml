@@ -5,11 +5,19 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="STATUS CONSOLE"
+        android:textColor="?attr/sfThemeDim" />
+
     <com.boyoffi9.scifikit.HudFrameView
         android:id="@+id/liveFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:clickable="true"
         android:focusable="true"
         android:padding="20dp">
@@ -25,24 +33,48 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="LIVE // CLASSIC"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:sfGlitchMode="onTouch" />
 
             <com.boyoffi9.scifikit.HoloRadarView
                 android:id="@+id/liveRadar"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Tap the panel to reconfigure everything live."
+                android:text="TAP PANEL TO RECONFIGURE //"
                 android:textColor="?attr/sfThemeDim"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
+    </com.boyoffi9.scifikit.HudFrameView>
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="BOOT LOG"
+        android:textColor="?attr/sfThemeDim" />
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:sfAccentColor="#7CFFB2"
+        app:sfSweep="false">
+
+        <TextView
+            android:id="@+id/bootLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textColor="?attr/sfThemeDim"
+            android:textSize="12sp" />
     </com.boyoffi9.scifikit.HudFrameView>
 
 </LinearLayout>

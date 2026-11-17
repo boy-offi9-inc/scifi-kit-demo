@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Text.SectionLabel" parent="android:Widget.Material.TextView">
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.18</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+</resources>

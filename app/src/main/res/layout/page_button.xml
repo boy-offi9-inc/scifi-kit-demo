@@ -5,10 +5,18 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="NEON BUTTONS"
+        android:textColor="?attr/sfThemeDim" />
+
     <com.boyoffi9.scifikit.HudFrameView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:padding="20dp"
         app:sfAccentColor="#00E5FF"
         app:sfSweep="false">
@@ -30,6 +38,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="ENGAGE" />
+
+            <com.boyoffi9.scifikit.NeonButtonView
+                android:id="@+id/neonGhost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="GHOST // STYLE 2"
+                app:sfNeonStyle="ghost" />
 
             <com.boyoffi9.scifikit.NeonButtonView
                 android:id="@+id/neonDisabled"

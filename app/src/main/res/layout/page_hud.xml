@@ -5,10 +5,18 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="HUD FRAMES"
+        android:textColor="?attr/sfThemeDim" />
+
     <com.boyoffi9.scifikit.HudFrameView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:padding="20dp">
 
         <LinearLayout
@@ -26,6 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Default frame. Takes its colour from the theme."
                 android:textColor="?attr/sfThemeDim"
                 android:textSize="13sp" />
@@ -35,7 +44,7 @@
     <com.boyoffi9.scifikit.HudFrameView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:padding="20dp"
         app:sfAccentColor="#FF2D6F"
         app:sfChamfer="22dp">
@@ -58,6 +67,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="sfChamfer=22dp, accent #FF2D6F"
                 android:textColor="?attr/sfThemeDim"
                 android:textSize="13sp" />
@@ -67,7 +77,7 @@
     <com.boyoffi9.scifikit.HudFrameView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:padding="20dp"
         app:sfAccentColor="#B388FF"
         app:sfSweep="false">
@@ -87,6 +97,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="sfSweep=false"
                 android:textColor="?attr/sfThemeDim"
                 android:textSize="13sp" />
@@ -96,7 +107,6 @@
     <com.boyoffi9.scifikit.HudFrameView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:padding="20dp"
         app:sfAccentColor="#7CFFB2"
         app:sfSweep="false"
@@ -117,6 +127,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="sfScanlines=false"
                 android:textColor="?attr/sfThemeDim"
                 android:textSize="13sp" />

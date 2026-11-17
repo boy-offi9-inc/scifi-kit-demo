@@ -5,11 +5,235 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include layout="@layout/page_hud" />
-    <include layout="@layout/page_text" />
-    <include layout="@layout/page_radar" />
-    <include layout="@layout/page_button" />
-    <include layout="@layout/page_theme" />
-    <include layout="@layout/page_live" />
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCIFIKIT"
+                android:textSize="34sp"
+                app:sfGlitchMode="onTouch"
+                app:sfIntensity="1.4"
+                app:sfSplitColorA="#FF2D6F"
+                app:sfSplitColorB="#FFC400" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Neon HUD components for Views and Compose"
+                android:textColor="?attr/sfThemeDim"
+                android:textSize="13sp" />
+
+            <com.boyoffi9.scifikit.HoloRadarView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="16dp"
+                app:sfRadarMode="tactical" />
+
+            <com.boyoffi9.scifikit.NeonButtonView
+                android:id="@+id/heroButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="INITIALISE" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.HudFrameView>
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="HUD FRAMES"
+        android:textColor="?attr/sfThemeDim" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <com.boyoffi9.scifikit.HudFrameView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:padding="16dp">
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEFAULT"
+                android:textSize="16sp"
+                app:sfGlitchMode="onTouch" />
+        </com.boyoffi9.scifikit.HudFrameView>
+
+        <com.boyoffi9.scifikit.HudFrameView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            app:sfAccentColor="#FF2D6F"
+            app:sfChamfer="22dp"
+            app:sfSweep="false">
+
+            <com.boyoffi9.scifikit.GlitchTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ALERT"
+                android:textSize="16sp"
+                app:sfGlitchMode="onTouch" />
+        </com.boyoffi9.scifikit.HudFrameView>
+    </LinearLayout>
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="GLITCH TEXT"
+        android:textColor="?attr/sfThemeDim" />
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:padding="16dp"
+        app:sfAccentColor="#B388FF"
+        app:sfSweep="false">
+
+        <com.boyoffi9.scifikit.GlitchTextView
+            android:id="@+id/showcaseDecode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACCESS GRANTED // NODE 7F"
+            android:textSize="16sp"
+            app:sfGlitchMode="onTouch" />
+    </com.boyoffi9.scifikit.HudFrameView>
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:id="@+id/showcaseReplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp"
+        app:sfAccentColor="#FFC400"
+        app:sfSweep="false">
+
+        <com.boyoffi9.scifikit.GlitchTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REPLAY DECODE >"
+            android:textSize="16sp"
+            app:sfGlitchMode="onTouch" />
+    </com.boyoffi9.scifikit.HudFrameView>
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="RADAR + BUTTONS"
+        android:textColor="?attr/sfThemeDim" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <com.boyoffi9.scifikit.HudFrameView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            app:sfAccentColor="#00E5FF"
+            app:sfSweep="false">
+
+            <com.boyoffi9.scifikit.HoloRadarView
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center_horizontal" />
+        </com.boyoffi9.scifikit.HudFrameView>
+
+        <com.boyoffi9.scifikit.HudFrameView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            app:sfAccentColor="#7CFFB2"
+            app:sfSweep="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.boyoffi9.scifikit.NeonButtonView
+                    android:id="@+id/showcaseSolid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ENGAGE"
+                    app:sfNeonStyle="solid" />
+
+                <com.boyoffi9.scifikit.NeonButtonView
+                    android:id="@+id/showcaseGhost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="GHOST"
+                    app:sfNeonStyle="ghost" />
+
+                <com.boyoffi9.scifikit.NeonButtonView
+                    android:id="@+id/showcaseLocked"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:enabled="false"
+                    android:text="LOCKED" />
+            </LinearLayout>
+        </com.boyoffi9.scifikit.HudFrameView>
+    </LinearLayout>
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="THEME"
+        android:textColor="?attr/sfThemeDim" />
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:sfSweep="false">
+
+        <com.boyoffi9.scifikit.GlitchTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="THEMED // FOLLOWS THE PALETTE"
+            android:textSize="16sp"
+            app:sfGlitchMode="onTouch" />
+    </com.boyoffi9.scifikit.HudFrameView>
 
 </LinearLayout>
