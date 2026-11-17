@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.horizontalScroll
@@ -124,10 +125,20 @@ private fun DemoRoot(onBack: () -> Unit) {
             GlitchText(
                 text = "SCIFIKIT // COMPOSE",
                 modifier = Modifier.padding(start = 20.dp, top = 20.dp),
-                fontSize = 30.sp,
+                fontSize = 24.sp,
                 glitch = Calm,
             )
-            Dim("Pick a page. Tap any glitch text to glitch it.", Modifier.padding(start = 20.dp, bottom = 12.dp))
+            Dim(
+                "Neon HUD components for Views and Compose",
+                Modifier.padding(start = 20.dp, top = 2.dp),
+            )
+            Box(
+                modifier = Modifier
+                    .padding(start = 20.dp, top = 12.dp, end = 20.dp)
+                    .fillMaxWidth()
+                    .height(1.dp)
+                    .background(Color(SciFiTheme.palette.dim).copy(alpha = 0.25f)),
+            )
             Tabs(page, onSelect = { page = it }, onBack = onBack)
             Column(
                 modifier = Modifier
@@ -166,27 +177,48 @@ private fun Tabs(selected: DemoPage, onSelect: (DemoPage) -> Unit, onBack: () ->
             .horizontalScroll(rememberScrollState())
             .padding(horizontal = 12.dp),
     ) {
-        TabText("< VIEWS", Color(palette.dim), onBack)
+        TabText("< VIEWS", false, Color(palette.dim), onBack)
         DemoPage.entries.forEach { entry ->
-            TabText(entry.title, Color(if (entry == selected) palette.accent else palette.dim)) { onSelect(entry) }
+            TabText(entry.title, entry == selected, Color(if (entry == selected) palette.accent else palette.dim)) {
+                onSelect(entry)
+            }
         }
     }
 }
 
 @Composable
-private fun TabText(text: String, color: Color, onClick: () -> Unit) {
+private fun TabText(text: String, selected: Boolean, color: Color, onClick: () -> Unit) {
+    Column(modifier = Modifier.clickable(onClick = onClick)) {
+        BasicText(
+            text = text,
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp),
+            style = TextStyle(color = color, fontSize = 14.sp, letterSpacing = 1.4.sp),
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(2.dp)
+                .background(if (selected) Color(SciFiTheme.palette.accent) else Color.Transparent),
+        )
+    }
+}
+
+@Composable
+private fun SectionLabel(text: String) {
     BasicText(
-        text = text,
-        modifier = Modifier
-            .clickable(onClick = onClick)
-            .padding(16.dp),
-        style = TextStyle(color = color, fontSize = 14.sp, letterSpacing = 1.4.sp),
+        text = text.uppercase(),
+        style = TextStyle(
+            color = Color(SciFiTheme.palette.dim),
+            fontSize = 11.sp,
+            letterSpacing = 2.sp,
+        ),
     )
 }
 
 @Composable
 private fun HudSection() {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        SectionLabel("HUD frames")
         HudFrame(modifier = Modifier.fillMaxWidth()) {
             Column {
                 GlitchText(text = "SYSTEM ONLINE", fontSize = 22.sp, glitch = Calm)
@@ -242,6 +274,7 @@ private fun TextSection() {
     var touch by remember { mutableStateOf(TouchMode.Burst) }
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        SectionLabel("Glitch text")
         HudFrame(
             modifier = Modifier.fillMaxWidth(),
             accentColor = Color(0xFFB388FF),
@@ -294,7 +327,9 @@ private fun TextSection() {
 private fun RadarSection() {
     var radar by remember { mutableStateOf(RadarMode.Classic) }
 
-    HudFrame(
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        SectionLabel("Holo radar")
+        HudFrame(
         modifier = Modifier.fillMaxWidth(),
         accentColor = Color(0xFF00E5FF),
         sweep = false,
@@ -306,6 +341,7 @@ private fun RadarSection() {
             }
         }
     }
+    }
 }
 
 @Composable
@@ -313,7 +349,9 @@ private fun ButtonSection() {
     var style by remember { mutableStateOf(NeonStyle.Outline) }
     var taps by remember { mutableIntStateOf(0) }
 
-    HudFrame(
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        SectionLabel("Neon buttons")
+        HudFrame(
         modifier = Modifier.fillMaxWidth(),
         accentColor = Color(0xFF00E5FF),
         sweep = false,
@@ -336,6 +374,7 @@ private fun ButtonSection() {
             Dim("TAPS: $taps")
         }
     }
+    }
 }
 
 @Composable
@@ -346,6 +385,7 @@ private fun ThemeSection(selected: DemoPalette, onSelect: (DemoPalette) -> Unit)
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
+            SectionLabel("Theme overlays")
             ModePicker(DemoPalette.entries, selected, onSelect)
             GlitchText(text = "THEMED // FOLLOWS THE PALETTE", fontSize = 18.sp, glitch = Calm)
             HoloRadar(size = 140.dp)
@@ -383,6 +423,7 @@ private fun LiveConfig() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
+            SectionLabel("Status console")
             GlitchText(
                 text = "LIVE // ${mode.name.uppercase()}",
                 fontSize = 18.sp,
