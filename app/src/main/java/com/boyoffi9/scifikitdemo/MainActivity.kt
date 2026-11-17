@@ -78,7 +78,10 @@ class MainActivity : ComponentActivity() {
             insets
         }
         palette = sciFiPalette()
-        findViewById<TextView>(R.id.kitVersion)?.text = "v0.5 // VIEWS+COMPOSE"
+        findViewById<TextView>(R.id.kitVersion)?.text = "v0.5"
+        intent?.getStringExtra(EXTRA_PAGE)?.let { name ->
+            pages.indexOfFirst { it.title.equals(name, true) }.takeIf { it >= 0 }?.let { currentPage = it }
+        }
         buildTabs()
         show(currentPage)
     }
@@ -158,19 +161,19 @@ class MainActivity : ComponentActivity() {
             "NEON DRIVE ..................... ONLINE",
             "ALL SYSTEMS NOMINAL",
         )
-        boot.handler.removeCallbacksAndMessages(null)
         boot.text = ""
-        var i = 0
-        val ticker = object : Runnable {
-            override fun run() {
-                if (i < lines.size) {
-                    boot.text = boot.text.toString() + (if (i == 0) "" else "\n") + lines[i]
-                    i++
-                    boot.postDelayed(this, 220)
-                }
+        boot.post { BootTicker(boot, lines).run() }
+    }
+
+    private class BootTicker(private val boot: TextView, private val lines: List<String>) : Runnable {
+        private var i = 0
+        override fun run() {
+            if (i < lines.size) {
+                boot.text = boot.text.toString() + (if (i == 0) "" else "\n") + lines[i]
+                i++
+                boot.postDelayed(this, 220)
             }
         }
-        boot.post(ticker)
     }
 
     private fun bindText(root: View) {
@@ -262,6 +265,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private companion object {
+        const val EXTRA_PAGE = "page"
         var overlayIndex = 0
         var currentPage = 0
     }

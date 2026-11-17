@@ -4,7 +4,12 @@
         <item name="android:windowBackground">?attr/sfThemeBackground</item>
         <item name="android:statusBarColor">?attr/sfThemeBackground</item>
         <item name="android:navigationBarColor">?attr/sfThemeBackground</item>
+        <item name="sfThemeAccent">#00E5FF</item>
+        <item name="sfThemeSecondary">#00E5FF</item>
+        <item name="sfThemeText">#CFEFF5</item>
+        <item name="sfThemeDim">#7FB8C4</item>
         <item name="sfThemeBackground">@color/sf_bg</item>
+        <item name="sfThemeGlow">1.0</item>
     </style>
 
     <style name="ThemeOverlay.SciFi.Amber" parent="">
