@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="NEON PROGRESS"
+        android:textColor="?attr/sfThemeDim" />
+
+    <com.boyoffi9.scifikit.HudFrameView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:padding="20dp"
+        app:sfAccentColor="#00E5FF"
+        app:sfSweep="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.boyoffi9.scifikit.NeonProgressView
+                android:id="@+id/progressLive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sfLabel="SYS. CORE LOAD"
+                app:sfProgress="0.842" />
+
+            <com.boyoffi9.scifikit.NeonProgressView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:sfLabel="MEM. ALLOCATION"
+                app:sfProgress="0.699" />
+
+            <com.boyoffi9.scifikit.NeonProgressView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:sfLabel="NET UPLINK"
+                app:sfProgress="0.918" />
+
+            <com.boyoffi9.scifikit.NeonProgressView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:sfLabel="HULL INTEGRITY"
+                app:sfProgress="0.78"
+                app:sfShowPercent="false" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.HudFrameView>
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="NEON GAUGES"
+        android:textColor="?attr/sfThemeDim" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <com.boyoffi9.scifikit.NeonGaugeView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:sfGaugeValue="0.72"
+            app:sfReadout="percent" />
+
+        <com.boyoffi9.scifikit.NeonGaugeView
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            app:sfGaugeValue="0.722"
+            app:sfGaugeValue2="130"
+            app:sfUnit="KM/H"
+            app:sfReadout="value"
+            app:sfGaugeSweep="300"
+            app:sfGaugeTicks="10" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="NEON BADGES"
+        android:textColor="?attr/sfThemeDim" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal">
+
+        <com.boyoffi9.scifikit.NeonBadgeView
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            app:sfText="BETA"
+            app:sfState="normal"
+            app:sfFilled="true" />
+
+        <com.boyoffi9.scifikit.NeonBadgeView
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:sfText="NEW"
+            app:sfState="success"
+            app:sfFilled="true" />
+
+        <com.boyoffi9.scifikit.NeonBadgeView
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:sfText="PREMIUM"
+            app:sfState="warning"
+            app:sfFilled="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal">
+
+        <com.boyoffi9.scifikit.NeonBadgeView
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            app:sfText="ONLINE"
+            app:sfState="success"
+            app:sfDot="true" />
+
+        <com.boyoffi9.scifikit.NeonBadgeView
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:sfText="OFFLINE"
+            app:sfState="muted"
+            app:sfDot="true" />
+
+        <com.boyoffi9.scifikit.NeonBadgeView
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:sfText="DANGER"
+            app:sfState="danger"
+            app:sfFilled="true" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="NEON ALERTS"
+        android:textColor="?attr/sfThemeDim" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.boyoffi9.scifikit.NeonAlertView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            app:sfAlertText="SCAN COMPLETE — NO HOSTILES DETECTED"
+            app:sfSeverity="success"
+            app:sfAlertChevrons="true" />
+
+        <com.boyoffi9.scifikit.NeonAlertView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            app:sfAlertText="SIGNAL STABLE"
+            app:sfSeverity="info"
+            app:sfAlertChevrons="true" />
+
+        <com.boyoffi9.scifikit.NeonAlertView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            app:sfAlertText="CORE TEMPERATURE HIGH"
+            app:sfSeverity="warning"
+            app:sfAlertHazard="0.22" />
+
+        <com.boyoffi9.scifikit.NeonAlertView
+            android:id="@+id/alertDanger"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            app:sfAlertText="REACTOR OVERLOAD IMMINENT"
+            app:sfSeverity="danger"
+            app:sfAlertHazard="0.3" />
+    </LinearLayout>
+
+</LinearLayout>

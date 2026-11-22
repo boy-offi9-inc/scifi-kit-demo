@@ -22,6 +22,7 @@ import com.boyoffi9.scifikit.GlitchTextView
 import com.boyoffi9.scifikit.HoloRadarView
 import com.boyoffi9.scifikit.HudFrameView
 import com.boyoffi9.scifikit.NeonButtonView
+import com.boyoffi9.scifikit.NeonProgressView
 import com.boyoffi9.scifikit.core.DecodeMode
 import com.boyoffi9.scifikit.core.GlitchMode
 import com.boyoffi9.scifikit.core.NeonStyle
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
         Page("TEXT", R.layout.page_text),
         Page("RADAR", R.layout.page_radar),
         Page("BUTTON", R.layout.page_button),
+        Page("STATUS", R.layout.page_status),
         Page("THEME", R.layout.page_theme),
         Page("LIVE", R.layout.page_live),
     )
@@ -78,7 +80,7 @@ class MainActivity : ComponentActivity() {
             insets
         }
         palette = sciFiPalette()
-        findViewById<TextView>(R.id.kitVersion)?.text = "v0.5"
+        findViewById<TextView>(R.id.kitVersion)?.text = "v0.9"
         intent?.getStringExtra(EXTRA_PAGE)?.let { name ->
             pages.indexOfFirst { it.title.equals(name, true) }.takeIf { it >= 0 }?.let { currentPage = it }
         }
@@ -140,6 +142,7 @@ class MainActivity : ComponentActivity() {
         bindText(root)
         bindRadar(root)
         bindButton(root)
+        bindStatus(root)
         bindTheme(root)
         bindLive(root)
         bindShowcase(root)
@@ -201,6 +204,16 @@ class MainActivity : ComponentActivity() {
             count?.text = "TAPS: $taps"
         }
         bindPicker(root, R.id.neonPicker, NeonStyle.entries) { sample.neon = it.config }
+    }
+
+    private fun bindStatus(root: View) {
+        val live = root.findViewById<NeonProgressView>(R.id.progressLive) ?: return
+        val steps = floatArrayOf(0.2f, 0.55f, 0.842f, 0.95f)
+        var i = 0
+        live.setOnClickListener {
+            i = (i + 1) % steps.size
+            live.progress = steps[i]
+        }
     }
 
     private fun bindTheme(root: View) {
