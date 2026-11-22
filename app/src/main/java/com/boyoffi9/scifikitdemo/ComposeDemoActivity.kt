@@ -17,12 +17,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,10 +38,17 @@ import androidx.compose.ui.unit.sp
 import com.boyoffi9.scifikit.compose.GlitchText
 import com.boyoffi9.scifikit.compose.HoloRadar
 import com.boyoffi9.scifikit.compose.HudFrame
+import com.boyoffi9.scifikit.compose.NeonAlert
+import com.boyoffi9.scifikit.compose.NeonBadge
 import com.boyoffi9.scifikit.compose.NeonButton
+import com.boyoffi9.scifikit.compose.NeonGauge
+import com.boyoffi9.scifikit.compose.NeonProgress
 import com.boyoffi9.scifikit.compose.SciFiTheme
 import com.boyoffi9.scifikit.core.DecodeMode
 import com.boyoffi9.scifikit.core.GlitchMode
+import com.boyoffi9.scifikit.core.NeonAlertPainter.Severity
+import com.boyoffi9.scifikit.core.NeonBadgePainter.State
+import com.boyoffi9.scifikit.core.NeonGaugePainter.Readout
 import com.boyoffi9.scifikit.core.NeonStyle
 import com.boyoffi9.scifikit.core.RadarMode
 import com.boyoffi9.scifikit.core.SciFiPalette
@@ -105,6 +114,7 @@ private enum class DemoPage(val title: String) {
     Text("TEXT"),
     Radar("RADAR"),
     Button("BUTTON"),
+    Status("STATUS"),
     Theme("THEME"),
     Live("LIVE"),
     All("ALL"),
@@ -152,6 +162,7 @@ private fun DemoRoot(onBack: () -> Unit) {
                     DemoPage.Text -> TextSection()
                     DemoPage.Radar -> RadarSection()
                     DemoPage.Button -> ButtonSection()
+                    DemoPage.Status -> StatusSection()
                     DemoPage.Theme -> ThemeSection(selected) { selected = it }
                     DemoPage.Live -> LiveConfig()
                     DemoPage.All -> {
@@ -374,6 +385,69 @@ private fun ButtonSection() {
             Dim("TAPS: $taps")
         }
     }
+    }
+}
+
+@Composable
+private fun StatusSection() {
+    var load by remember { mutableFloatStateOf(0.842f) }
+
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        SectionLabel("Neon progress")
+        HudFrame(modifier = Modifier.fillMaxWidth(), sweep = false) {
+            Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                NeonProgress(label = "SYS. CORE LOAD", progress = load)
+                NeonProgress(label = "MEM. ALLOCATION", progress = 0.699f)
+                NeonProgress(label = "NET UPLINK", progress = 0.918f)
+                NeonProgress(label = "HULL INTEGRITY", progress = 0.78f, showPercent = false)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf(0.2f, 0.55f, 0.842f, 0.95f).forEach { p ->
+                        PickerText(
+                            text = "${(p * 100).toInt()}%",
+                            modifier = Modifier
+                                .background(Color(0xFF0B1218))
+                                .clickable { load = p }
+                                .padding(10.dp),
+                        )
+                    }
+                }
+            }
+        }
+
+        SectionLabel("Neon gauges")
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            NeonGauge(progress = 0.72f, modifier = Modifier.size(120.dp), readout = Readout.Percent)
+            NeonGauge(
+                progress = 130f / 180f,
+                value = 130f,
+                unit = "KM/H",
+                readout = Readout.Value,
+                sweepDegrees = 300f,
+                ticks = 10,
+                modifier = Modifier.size(140.dp),
+            )
+        }
+
+        SectionLabel("Neon badges")
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            NeonBadge(text = "BETA", state = State.Normal, filled = true)
+            NeonBadge(text = "NEW", state = State.Success, filled = true)
+            NeonBadge(text = "PREMIUM", state = State.Warning, filled = true)
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            NeonBadge(text = "ONLINE", state = State.Success, showDot = true)
+            NeonBadge(text = "OFFLINE", state = State.Muted, showDot = true)
+            NeonBadge(text = "DANGER", state = State.Danger, filled = true)
+        }
+
+        SectionLabel("Neon alerts")
+        NeonAlert(text = "SCAN COMPLETE — NO HOSTILES DETECTED", severity = Severity.Success, showChevrons = true)
+        NeonAlert(text = "SIGNAL STABLE", severity = Severity.Info, showChevrons = true)
+        NeonAlert(text = "CORE TEMPERATURE HIGH", severity = Severity.Warning, hazard = 0.22f)
+        NeonAlert(text = "REACTOR OVERLOAD IMMINENT", severity = Severity.Danger, hazard = 0.3f)
     }
 }
 
