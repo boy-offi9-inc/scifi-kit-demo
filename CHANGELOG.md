@@ -2,7 +2,7 @@
 
 Notable changes to the demo app. Its version follows the SciFiKit release it is built against.
 
-## Unreleased
+## 0.3.0 - unreleased
 
 ### Added
 - Card page in both screens: the sci-fi card in its panel, outline and plain styles, previously absent from the demo.

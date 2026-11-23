@@ -11,8 +11,8 @@ android {
         applicationId = "com.boyoffi9.scifikitdemo"
         minSdk = 21
         targetSdk = 34
-        versionCode = 1
-        versionName = "0.2.1"
+        versionCode = 3
+        versionName = "0.3.0"
     }
 
     buildFeatures {
