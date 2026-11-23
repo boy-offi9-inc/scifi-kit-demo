@@ -14,8 +14,8 @@ Each screen is split into pages, chosen from the tab strip under the title:
 | HUD | Frame variants: default, chamfered, no sweep, no scanlines |
 | TEXT | Decode, glitch and touch modes, each with a dropdown |
 | RADAR | Radar modes with a dropdown |
-| BUTTON | Neon button styles with a dropdown, plus a disabled button |
-| CARD | Sci-fi card in all three styles: panel, outline, plain |
+| BUTTON | Neon button styles (outline, solid, ghost, charge, angled, slab) with a dropdown, plus a disabled button |
+| CARD | Sci-fi card in all five styles: panel, outline, targeted, terminal, plain |
 | STATUS | Neon progress, gauges, badges and alerts |
 | THEME | Palettes, applied through the theme |
 | LIVE | A panel you tap to change every setting at runtime |

@@ -2,6 +2,15 @@
 
 Notable changes to the demo app. Its version follows the SciFiKit release it is built against.
 
+## 0.4.0 - unreleased
+
+### Added
+- Built against SciFiKit v0.11.0: the sonar radar mode, charge, angled and slab button styles, targeted and terminal card styles, segmented progress bars and the reworked alerts.
+- Button pages show the three new button styles next to the classics.
+- Card pages show the targeted (red) and terminal (green) styles.
+- Status pages add a segmented LED progress bar.
+- Radar mode dropdowns include sonar.
+
 ## 0.3.0 - unreleased
 
 ### Added
