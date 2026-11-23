@@ -4,8 +4,8 @@ Demo app for [SciFiKit](https://github.com/boy-offi9-inc/scifi-ui-kit), a librar
 
 The app has two screens that show the same components built two ways:
 
-- **Views demo:** XML layouts with `HudFrameView`, `GlitchTextView`, `HoloRadarView` and `NeonButtonView`
-- **Compose demo:** the same screen with `HudFrame`, `GlitchText`, `HoloRadar` and `NeonButton`
+- **Views demo:** XML layouts with every component in the kit
+- **Compose demo:** the same components as composables
 
 Each screen is split into pages, chosen from the tab strip under the title:
 
@@ -15,6 +15,8 @@ Each screen is split into pages, chosen from the tab strip under the title:
 | TEXT | Decode, glitch and touch modes, each with a dropdown |
 | RADAR | Radar modes with a dropdown |
 | BUTTON | Neon button styles with a dropdown, plus a disabled button |
+| CARD | Sci-fi card in all three styles: panel, outline, plain |
+| STATUS | Neon progress, gauges, badges and alerts |
 | THEME | Palettes, applied through the theme |
 | LIVE | A panel you tap to change every setting at runtime |
 | ALL | Every page above on one screen |
@@ -40,9 +42,9 @@ Requires JDK 17.
 The app depends on SciFiKit through JitPack, the same way any other app would. See `app/build.gradle.kts`:
 
 ```kotlin
-implementation("com.github.boy-offi9-inc:scifi-ui-kit:main-SNAPSHOT")
+implementation("com.github.boy-offi9-inc:scifi-ui-kit:v0.9.0")
 ```
 
-It tracks `main-SNAPSHOT`, the latest library commit, so changes show up here before a release. For a reproducible build, pin a release tag such as `v0.2.1`.
+The demo pins the same release tag that ships the components it shows. To track the latest library commit instead, use `main-SNAPSHOT`.
 
 The library keeps Jetpack Compose as `compileOnly`, so this app declares its own Compose dependencies.

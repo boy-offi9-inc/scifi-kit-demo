@@ -41,6 +41,7 @@ class MainActivity : ComponentActivity() {
         Page("TEXT", R.layout.page_text),
         Page("RADAR", R.layout.page_radar),
         Page("BUTTON", R.layout.page_button),
+        Page("CARD", R.layout.page_card),
         Page("STATUS", R.layout.page_status),
         Page("THEME", R.layout.page_theme),
         Page("LIVE", R.layout.page_live),

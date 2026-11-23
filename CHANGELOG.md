@@ -5,6 +5,7 @@ Notable changes to the demo app. Its version follows the SciFiKit release it is 
 ## Unreleased
 
 ### Added
+- Card page in both screens: the sci-fi card in its panel, outline and plain styles, previously absent from the demo.
 - Status page in both screens: neon progress bars (with a tap-to-cycle live one), donut and speedometer gauges, badge state rows and alert banners including the marching hazard strip.
 - Button page in both screens: outline, solid and ghost neon buttons, plus a disabled one.
 - Pages in both screens: HUD, Text, Radar, Theme and Live, plus an All page that shows everything.

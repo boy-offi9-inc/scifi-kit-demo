@@ -43,12 +43,14 @@ import com.boyoffi9.scifikit.compose.NeonBadge
 import com.boyoffi9.scifikit.compose.NeonButton
 import com.boyoffi9.scifikit.compose.NeonGauge
 import com.boyoffi9.scifikit.compose.NeonProgress
+import com.boyoffi9.scifikit.compose.SciFiCard
 import com.boyoffi9.scifikit.compose.SciFiTheme
 import com.boyoffi9.scifikit.core.DecodeMode
 import com.boyoffi9.scifikit.core.GlitchMode
 import com.boyoffi9.scifikit.core.NeonAlertPainter.Severity
 import com.boyoffi9.scifikit.core.NeonBadgePainter.State
 import com.boyoffi9.scifikit.core.NeonGaugePainter.Readout
+import com.boyoffi9.scifikit.core.CardStyle
 import com.boyoffi9.scifikit.core.NeonStyle
 import com.boyoffi9.scifikit.core.RadarMode
 import com.boyoffi9.scifikit.core.SciFiPalette
@@ -114,6 +116,7 @@ private enum class DemoPage(val title: String) {
     Text("TEXT"),
     Radar("RADAR"),
     Button("BUTTON"),
+    Card("CARD"),
     Status("STATUS"),
     Theme("THEME"),
     Live("LIVE"),
@@ -162,6 +165,7 @@ private fun DemoRoot(onBack: () -> Unit) {
                     DemoPage.Text -> TextSection()
                     DemoPage.Radar -> RadarSection()
                     DemoPage.Button -> ButtonSection()
+                    DemoPage.Card -> CardSection()
                     DemoPage.Status -> StatusSection()
                     DemoPage.Theme -> ThemeSection(selected) { selected = it }
                     DemoPage.Live -> LiveConfig()
@@ -170,6 +174,8 @@ private fun DemoRoot(onBack: () -> Unit) {
                         TextSection()
                         RadarSection()
                         ButtonSection()
+                        CardSection()
+                        StatusSection()
                         ThemeSection(selected) { selected = it }
                         LiveConfig()
                     }
@@ -385,6 +391,48 @@ private fun ButtonSection() {
             Dim("TAPS: $taps")
         }
     }
+    }
+}
+
+
+@Composable
+private fun CardSection() {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        SectionLabel("Sci-fi card")
+        SciFiCard(
+            modifier = Modifier.fillMaxWidth(),
+            style = CardStyle.Panel.config.copy(march = 1f),
+            accentColor = Color(0xFFFFC400),
+        ) {
+            Column(modifier = Modifier.padding(4.dp)) {
+                BasicText(
+                    "NEW UPDATE",
+                    style = TextStyle(color = Color(0xFFFFC400), fontSize = 14.sp),
+                )
+                Dim(
+                    "The panel style: cut corners, layered border, accent bands and marching hazard stripes. Put any composables inside.",
+                    Modifier.padding(top = 6.dp),
+                )
+            }
+        }
+        SciFiCard(
+            modifier = Modifier.fillMaxWidth(),
+            style = CardStyle.Outline.config.copy(grid = 0.12f),
+        ) {
+            Column(modifier = Modifier.padding(4.dp)) {
+                BasicText(
+                    "OUTLINE // TARGET LOCKED",
+                    style = TextStyle(color = Color(SciFiTheme.palette.accent), fontSize = 14.sp),
+                )
+                Dim(
+                    "Thin frame with corner brackets, a target ring, arrows, dotted rows, a hazard footer and a faint grid.",
+                    Modifier.padding(top = 6.dp),
+                )
+            }
+        }
+        SciFiCard(modifier = Modifier.fillMaxWidth(), style = CardStyle.Plain.config) {
+            Dim("PLAIN // QUIET CONTAINER", Modifier.padding(4.dp))
+        }
     }
 }
 

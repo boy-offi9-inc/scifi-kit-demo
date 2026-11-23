@@ -6,6 +6,7 @@
         <item name="android:navigationBarColor">?attr/sfThemeBackground</item>
         <item name="sfThemeAccent">#00E5FF</item>
         <item name="sfThemeSecondary">#00E5FF</item>
+        <item name="sfThemeDanger">#FF2D6F</item>
         <item name="sfThemeText">#CFEFF5</item>
         <item name="sfThemeDim">#7FB8C4</item>
         <item name="sfThemeBackground">@color/sf_bg</item>
@@ -15,6 +16,7 @@
     <style name="ThemeOverlay.SciFi.Amber" parent="">
         <item name="sfThemeAccent">#FFC400</item>
         <item name="sfThemeSecondary">#FF5A1F</item>
+        <item name="sfThemeDanger">#FF2D6F</item>
         <item name="sfThemeText">#FFF1CC</item>
         <item name="sfThemeDim">#C9A24A</item>
         <item name="sfThemeBackground">#0A0700</item>
@@ -24,6 +26,7 @@
     <style name="ThemeOverlay.SciFi.Phosphor" parent="">
         <item name="sfThemeAccent">#7CFFB2</item>
         <item name="sfThemeSecondary">#C8FF4D</item>
+        <item name="sfThemeDanger">#FF2D6F</item>
         <item name="sfThemeText">#D9FFE8</item>
         <item name="sfThemeDim">#5FA37A</item>
         <item name="sfThemeBackground">#03100A</item>
@@ -33,6 +36,7 @@
     <style name="ThemeOverlay.SciFi.Magenta" parent="">
         <item name="sfThemeAccent">#FF2D6F</item>
         <item name="sfThemeSecondary">#00E5FF</item>
+        <item name="sfThemeDanger">#FF2D6F</item>
         <item name="sfThemeText">#FFE3EE</item>
         <item name="sfThemeDim">#C27A94</item>
         <item name="sfThemeBackground">#0E0510</item>

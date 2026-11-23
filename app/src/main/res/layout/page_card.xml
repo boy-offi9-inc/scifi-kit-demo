@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/Text.SectionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="SCI-FI CARD"
+        android:textColor="?attr/sfThemeDim" />
+
+    <com.boyoffi9.scifikit.SciFiCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:sfCardStyle="panel"
+        app:sfAccentColor="#FFC400"
+        app:sfCardMarch="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:textStyle="bold"
+                android:text="NEW UPDATE"
+                android:textColor="#FFC400"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="monospace"
+                android:text="The panel style: cut corners, layered border, accent bands and marching hazard stripes. Put any views inside."
+                android:textColor="?attr/sfThemeText"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.SciFiCardView>
+
+    <com.boyoffi9.scifikit.SciFiCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:sfCardStyle="outline"
+        app:sfCardGrid="0.12">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:textStyle="bold"
+                android:text="OUTLINE // TARGET LOCKED"
+                android:textColor="?attr/sfThemeAccent"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="monospace"
+                android:text="Thin frame with corner brackets, a target ring, arrows, dotted rows, a hazard footer and a faint grid."
+                android:textColor="?attr/sfThemeText"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.SciFiCardView>
+
+    <com.boyoffi9.scifikit.SciFiCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:sfCardStyle="plain">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="PLAIN // QUIET CONTAINER"
+            android:textColor="?attr/sfThemeDim"
+            android:textSize="14sp" />
+    </com.boyoffi9.scifikit.SciFiCardView>
+
+</LinearLayout>
