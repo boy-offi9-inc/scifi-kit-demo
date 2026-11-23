@@ -2,25 +2,54 @@ name: build
 
 on:
   push:
+    branches: [ main ]
+    tags: [ 'v*' ]
   pull_request:
+    branches: [ main ]
   workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
+
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.7
+          dependency-graph: disabled
+
       - name: Build debug APK
-        run: gradle :app:assembleDebug
-      - name: Upload APK
+        run: gradle :app:assembleDebug --stacktrace
+
+      # Interim builds stay in the Actions tab only, with a short retention
+      # so the artifact list never grows into a junk drawer.
+      - name: Upload CI artifact
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v4
         with:
           name: scifikit-demo-debug
           path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7
+
+      # Tagged builds ship the APK to GitHub Releases, which is where
+      # people can actually download it.
+      - name: Release APK
+        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        uses: softprops/action-gh-release@v2
+        with:
+          files: app/build/outputs/apk/debug/*.apk
+          generate_release_notes: true
