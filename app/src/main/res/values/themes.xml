@@ -13,7 +13,7 @@
     </style>
 
     <style name="ThemeOverlay.SciFi.Danger" parent="">
-        <item name="sfThemeSecondary">#FF2D6F</item>
+        <item name="sfThemeDanger">#FF2D6F</item>
     </style>
 
     <style name="ThemeOverlay.SciFi.Amber" parent="">

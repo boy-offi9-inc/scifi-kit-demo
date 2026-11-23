@@ -488,12 +488,7 @@ private fun StatusSection() {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             NeonBadge(text = "ONLINE", state = State.Success, showDot = true)
             NeonBadge(text = "OFFLINE", state = State.Muted, showDot = true)
-            NeonBadge(
-                text = "DANGER",
-                state = State.Danger,
-                filled = true,
-                warningColor = Color(0xFFFF2D6F),
-            )
+            NeonBadge(text = "DANGER", state = State.Danger, filled = true)
         }
 
         SectionLabel("Neon alerts")
