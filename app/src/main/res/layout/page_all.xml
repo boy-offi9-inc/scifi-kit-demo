@@ -361,7 +361,8 @@
             android:layout_weight="1"
             app:sfText="PREMIUM"
             app:sfState="warning"
-            app:sfFilled="true" />
+            app:sfFilled="true"
+            app:sfAccentColor="#FFB020" />
     </LinearLayout>
 
     <LinearLayout
