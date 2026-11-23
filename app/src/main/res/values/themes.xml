@@ -5,16 +5,20 @@
         <item name="android:statusBarColor">?attr/sfThemeBackground</item>
         <item name="android:navigationBarColor">?attr/sfThemeBackground</item>
         <item name="sfThemeAccent">#00E5FF</item>
-        <item name="sfThemeSecondary">#FF2D6F</item>
+        <item name="sfThemeSecondary">#FFB020</item>
         <item name="sfThemeText">#CFEFF5</item>
         <item name="sfThemeDim">#7FB8C4</item>
         <item name="sfThemeBackground">@color/sf_bg</item>
         <item name="sfThemeGlow">1.0</item>
     </style>
 
+    <style name="ThemeOverlay.SciFi.Danger" parent="">
+        <item name="sfThemeSecondary">#FF2D6F</item>
+    </style>
+
     <style name="ThemeOverlay.SciFi.Amber" parent="">
         <item name="sfThemeAccent">#FFC400</item>
-        <item name="sfThemeSecondary">#FF5A1F</item>
+        <item name="sfThemeSecondary">#FFB020</item>
         <item name="sfThemeText">#FFF1CC</item>
         <item name="sfThemeDim">#C9A24A</item>
         <item name="sfThemeBackground">#0A0700</item>

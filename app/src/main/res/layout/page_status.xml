@@ -128,8 +128,7 @@
             android:layout_weight="1"
             app:sfText="PREMIUM"
             app:sfState="warning"
-            app:sfFilled="true"
-            app:sfAccentColor="#FFB020" />
+            app:sfFilled="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -162,7 +161,8 @@
             android:layout_weight="1"
             app:sfText="DANGER"
             app:sfState="danger"
-            app:sfFilled="true" />
+            app:sfFilled="true"
+            android:theme="@style/ThemeOverlay.SciFi.Danger" />
     </LinearLayout>
 
     <TextView
