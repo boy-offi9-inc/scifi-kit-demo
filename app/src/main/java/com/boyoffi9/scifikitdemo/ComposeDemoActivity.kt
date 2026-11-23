@@ -425,7 +425,39 @@ private fun CardSection() {
                     style = TextStyle(color = Color(SciFiTheme.palette.accent), fontSize = 14.sp),
                 )
                 Dim(
-                    "Thin frame with corner brackets, a target ring, arrows, dotted rows, a hazard footer and a faint grid.",
+                    "Thin frame with layered border, corner brackets, a target ring, arrows, dotted rows, a hazard footer and a faint grid.",
+                    Modifier.padding(top = 6.dp),
+                )
+            }
+        }
+        SciFiCard(
+            modifier = Modifier.fillMaxWidth(),
+            style = CardStyle.Targeted.config,
+            accentColor = Color(0xFFFF3B5C),
+        ) {
+            Column(modifier = Modifier.padding(4.dp)) {
+                BasicText(
+                    "TARGETED // TRACKING",
+                    style = TextStyle(color = Color(0xFFFF3B5C), fontSize = 14.sp),
+                )
+                Dim(
+                    "Flat-top frame with bracket corners, side ticks, a top hazard strip and a marching target ring. Built for hostile and lock-on states.",
+                    Modifier.padding(top = 6.dp),
+                )
+            }
+        }
+        SciFiCard(
+            modifier = Modifier.fillMaxWidth(),
+            style = CardStyle.Terminal.config,
+            accentColor = Color(0xFF3BFFA0),
+        ) {
+            Column(modifier = Modifier.padding(4.dp)) {
+                BasicText(
+                    "TERMINAL // LOG OUTPUT",
+                    style = TextStyle(color = Color(0xFF3BFFA0), fontSize = 14.sp),
+                )
+                Dim(
+                    "Sweep-cut corner, layered inner line, dot rows and edge arrows. A calmer console frame for feed and log content.",
                     Modifier.padding(top = 6.dp),
                 )
             }
@@ -448,6 +480,7 @@ private fun StatusSection() {
                 NeonProgress(label = "MEM. ALLOCATION", progress = 0.699f)
                 NeonProgress(label = "NET UPLINK", progress = 0.918f)
                 NeonProgress(label = "HULL INTEGRITY", progress = 0.78f, showPercent = false)
+                NeonProgress(label = "REACTOR OUTPUT", progress = 0.46f, segmented = true)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     listOf(0.2f, 0.55f, 0.842f, 0.95f).forEach { p ->
                         PickerText(

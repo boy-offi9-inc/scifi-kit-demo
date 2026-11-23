@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="monospace"
-                android:text="Thin frame with corner brackets, a target ring, arrows, dotted rows, a hazard footer and a faint grid."
+                android:text="Thin frame with layered border, corner brackets, a target ring, arrows, dotted rows, a hazard footer and a faint grid."
                 android:textColor="?attr/sfThemeText"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -93,4 +93,68 @@
             android:textSize="14sp" />
     </com.boyoffi9.scifikit.SciFiCardView>
 
+<com.boyoffi9.scifikit.SciFiCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:sfCardStyle="targeted"
+        app:sfAccentColor="#FF3B5C"
+        app:sfCardCut="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:textStyle="bold"
+                android:text="TARGETED // TRACKING"
+                android:textColor="#FF3B5C"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="monospace"
+                android:text="Flat-top frame with bracket corners, side ticks, a top hazard strip and a marching target ring. Built for hostile and lock-on states."
+                android:textColor="?attr/sfThemeText"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.SciFiCardView>
+
+    <com.boyoffi9.scifikit.SciFiCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:sfCardStyle="terminal"
+        app:sfAccentColor="#3BFFA0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:textStyle="bold"
+                android:text="TERMINAL // LOG OUTPUT"
+                android:textColor="#3BFFA0"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="monospace"
+                android:text="Sweep-cut corner, layered inner line, dot rows and edge arrows. A calmer console frame for feed and log content."
+                android:textColor="?attr/sfThemeText"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </com.boyoffi9.scifikit.SciFiCardView>
 </LinearLayout>

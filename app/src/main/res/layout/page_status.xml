@@ -54,6 +54,14 @@
                 app:sfLabel="HULL INTEGRITY"
                 app:sfProgress="0.78"
                 app:sfShowPercent="false" />
+
+            <com.boyoffi9.scifikit.NeonProgressView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:sfLabel="REACTOR OUTPUT"
+                app:sfProgress="0.46"
+                app:sfProgressSegmented="true" />
         </LinearLayout>
     </com.boyoffi9.scifikit.HudFrameView>
 
@@ -181,7 +189,7 @@
         <com.boyoffi9.scifikit.NeonAlertView
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            app:sfAlertText="SCAN COMPLETE — NO HOSTILES DETECTED"
+            app:sfAlertText="SCAN COMPLETE // NO HOSTILES DETECTED"
             app:sfSeverity="success"
             app:sfAlertChevrons="true" />
 

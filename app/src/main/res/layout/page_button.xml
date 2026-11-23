@@ -40,6 +40,27 @@
                 android:text="ENGAGE" />
 
             <com.boyoffi9.scifikit.NeonButtonView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="CHARGE // PULSE"
+                app:sfNeonStyle="charge" />
+
+            <com.boyoffi9.scifikit.NeonButtonView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="ANGLED // BLADE"
+                app:sfNeonStyle="angled" />
+
+            <com.boyoffi9.scifikit.NeonButtonView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="SOLID // SLAB"
+                app:sfNeonStyle="slab" />
+
+            <com.boyoffi9.scifikit.NeonButtonView
                 android:id="@+id/neonGhost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
