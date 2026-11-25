@@ -2,6 +2,11 @@
 
 Notable changes to the demo app. Its version follows the SciFiKit release it is built against.
 
+## 0.5.1 - unreleased
+
+### Fixed
+- Built against SciFiKit v0.12.1: the gauges render again on the status pages — the v0.12.0 instrument frame drew nothing on the demo's 120dp views (stroke-proportional insets exceeded the view size).
+
 ## 0.5.0 - unreleased
 
 ### Changed

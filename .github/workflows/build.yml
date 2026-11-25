@@ -45,6 +45,25 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      # Auto-release: on a successful main build whose versionName has no tag
+      # yet, cut v<versionName> and push it — the tag push re-enters this
+      # workflow and ships the APK to GitHub Releases below.
+      - name: Auto-tag release
+        if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
+        run: |
+          VER=$(grep -oP 'versionName\s*=\s*"\K[^"]+' app/build.gradle.kts | head -1)
+          if [ -z "$VER" ]; then echo "::error::could not read versionName"; exit 1; fi
+          TAG="v${VER}"
+          if git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1; then
+            echo "::notice::tag ${TAG} already exists — skipping auto-tag"
+          else
+            git config user.name "Boy Offi9"
+            git config user.email "boyxoffi9@gmail.com"
+            git tag -a "${TAG}" -m "Release ${TAG} (auto: green build on main)"
+            git push origin "${TAG}"
+            echo "::notice::auto-tagged ${TAG} after a green build"
+          fi
+
       # Tagged builds ship the APK to GitHub Releases, which is where
       # people can actually download it.
       - name: Release APK
