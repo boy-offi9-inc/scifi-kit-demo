@@ -2,6 +2,11 @@
 
 Notable changes to the demo app. Its version follows the SciFiKit release it is built against.
 
+## 0.5.0 - unreleased
+
+### Changed
+- Built against SciFiKit v0.12.0: the gauge, alert and progress components are re-silhouetted to the HUD language — instrument-frame gauges with bracketed readouts, notification-block alerts with a severity glyph column, and terminal-bracket progress bars. The status pages pick all three up automatically.
+
 ## 0.4.0 - unreleased
 
 ### Added

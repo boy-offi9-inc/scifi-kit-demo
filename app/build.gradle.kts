@@ -11,8 +11,8 @@ android {
         applicationId = "com.boyoffi9.scifikitdemo"
         minSdk = 21
         targetSdk = 34
-        versionCode = 4
-        versionName = "0.4.0"
+        versionCode = 5
+        versionName = "0.5.0"
     }
 
     buildFeatures {
@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation("com.github.boy-offi9-inc:scifi-ui-kit:v0.11.0")
+    implementation("com.github.boy-offi9-inc:scifi-ui-kit:v0.12.0")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.activity:activity-compose:1.9.0")
 
